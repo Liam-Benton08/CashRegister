@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
+using System.Threading;
 
 namespace CashRegister
 {
     public partial class CashRegister : Form
     {
-        
+        SoundPlayer ding = new SoundPlayer(Properties.Resources.ding);
+        SoundPlayer error = new SoundPlayer(Properties.Resources.error);
         double hyperlightprice = 350;
         double trigger7price = 400;
         double syncprice = 300;
@@ -58,6 +61,7 @@ namespace CashRegister
         {
             try
             {
+                ding.Play();
                 numofhyperlight = Convert.ToInt32(hyperlightnumInput.Text);
                 numoftrigger7 = Convert.ToInt32(trigger7numInput.Text);
                 numofsync = Convert.ToInt32(syncnumInput.Text);
@@ -186,6 +190,7 @@ namespace CashRegister
 
         private void sticksButton_Click(object sender, EventArgs e)
         {
+            ding.Play();
             hyperlightnumInput.Location = new Point(728, 123);
             trigger7numInput.Location = new Point(728, 281);
             syncnumInput.Location = new Point(728, 422);
@@ -214,6 +219,8 @@ namespace CashRegister
 
         private void gearButton_Click(object sender, EventArgs e)
         {
+
+            ding.Play();
             numofpantsInput.Location = new Point(728, 422);
             numofskatesInput.Location = new Point(728, 281);
             numofchestpadInput.Location = new Point(728, 123);
@@ -237,6 +244,8 @@ namespace CashRegister
 
         private void extrasButton_Click(object sender, EventArgs e)
         {
+
+            ding.Play();
             numofcleartapeInput.Location = new Point(728, 123);
             numofsticktapeInput.Location = new Point(728, 281);
             numoflacesInput.Location = new Point(728, 422);
@@ -267,36 +276,48 @@ namespace CashRegister
 
         private void printreciptButton_Click(object sender, EventArgs e)
         {
-            tenderedamount = Convert.ToDouble(tenderedamountInput.Text);
+            try
+            {
+                ding.Play();
 
-            totalchange = tenderedamount - totalprice;
+                tenderedamount = Convert.ToDouble(tenderedamountInput.Text);
 
-            printreciptButton.Location = new Point(1000, 1000);
+                totalchange = tenderedamount - totalprice;
 
-            recipttextOutput.Visible = true;
+                printreciptButton.Location = new Point(1000, 1000);
 
-            recipttextOutput.Text = $"-------------------------------------------------------------";
-            recipttextOutput.Text += $"\n                   Hockey World INC";
-            recipttextOutput.Text += $"\n-------------------------------------------------------------";
-            recipttextOutput.Text += $"\n     Order Number 1001";
-            recipttextOutput.Text += $"\n     September 5, 2008";
-            recipttextOutput.Text += $"\n-------------------------------------------------------------";
-            recipttextOutput.Text += $"\n     Hyperlights      x{numofhyperlight} @ {hyperlighttotal.ToString("C")}";
-            recipttextOutput.Text += $"\n     Trigger7           x{numoftrigger7} @ {trigger7total.ToString("C")}";
-            recipttextOutput.Text += $"\n     Syncs               x{numofsync} @ {synctotal.ToString("C")}";
-            recipttextOutput.Text += $"\n     Chestpad        x{numofchestpad} @ {chestpadtotal.ToString("C")}";
-            recipttextOutput.Text += $"\n     Skates            x{numofskates} @ {skatestotal.ToString("C")}";
-            recipttextOutput.Text += $"\n     Pants              x{numofpants} @ {pantstotal.ToString("C")}";
-            recipttextOutput.Text += $"\n     Clear tape       x{numofcleartape} @ {cleartapetotal.ToString("C")}";
-            recipttextOutput.Text += $"\n     Stick tape       x{numofsticktape} @ {sticktapetotal.ToString("C")}";
-            recipttextOutput.Text += $"\n     Laces              x{numoflaces} @ {lacestotal.ToString("C")}";
-            recipttextOutput.Text += $"\n-------------------------------------------------------------";
-            recipttextOutput.Text += $"\n     Subtotal                     {subtotal.ToString("C")}";
-            recipttextOutput.Text += $"\n     Tax                             {taxamount.ToString("C")}";
-            recipttextOutput.Text += $"\n     Total                           {totalprice.ToString("C")}";
-            recipttextOutput.Text += $"\n-------------------------------------------------------------";
-            recipttextOutput.Text += $"\n     Tendered                   {tenderedamount.ToString("C")}";
-            recipttextOutput.Text += $"\n     Change                     {totalchange.ToString("C")}";
+                recipttextOutput.Visible = true;
+
+                recipttextOutput.Text = $"-------------------------------------------------------------";
+                recipttextOutput.Text += $"\n                   Hockey World INC";
+                recipttextOutput.Text += $"\n-------------------------------------------------------------";
+                recipttextOutput.Text += $"\n     Order Number 1001";
+                recipttextOutput.Text += $"\n     September 5, 2008";
+                recipttextOutput.Text += $"\n-------------------------------------------------------------";
+                recipttextOutput.Text += $"\n     Hyperlights      x{numofhyperlight} @ {hyperlighttotal.ToString("C")}";
+                recipttextOutput.Text += $"\n     Trigger7           x{numoftrigger7} @ {trigger7total.ToString("C")}";
+                recipttextOutput.Text += $"\n     Syncs               x{numofsync} @ {synctotal.ToString("C")}";
+                recipttextOutput.Text += $"\n     Chestpad        x{numofchestpad} @ {chestpadtotal.ToString("C")}";
+                recipttextOutput.Text += $"\n     Skates            x{numofskates} @ {skatestotal.ToString("C")}";
+                recipttextOutput.Text += $"\n     Pants              x{numofpants} @ {pantstotal.ToString("C")}";
+                recipttextOutput.Text += $"\n     Clear tape       x{numofcleartape} @ {cleartapetotal.ToString("C")}";
+                recipttextOutput.Text += $"\n     Stick tape       x{numofsticktape} @ {sticktapetotal.ToString("C")}";
+                recipttextOutput.Text += $"\n     Laces              x{numoflaces} @ {lacestotal.ToString("C")}";
+                recipttextOutput.Text += $"\n-------------------------------------------------------------";
+                recipttextOutput.Text += $"\n     Subtotal                     {subtotal.ToString("C")}";
+                recipttextOutput.Text += $"\n     Tax                             {taxamount.ToString("C")}";
+                recipttextOutput.Text += $"\n     Total                           {totalprice.ToString("C")}";
+                recipttextOutput.Text += $"\n-------------------------------------------------------------";
+                recipttextOutput.Text += $"\n     Tendered                   {tenderedamount.ToString("C")}";
+                recipttextOutput.Text += $"\n     Change                     {totalchange.ToString("C")}";
+            }
+            catch
+            {
+                errormessageLabel.Visible = true;
+                errormessage2Label.Visible = true;
+                errormessage2Label.BringToFront();
+                gobackButton.Location = new Point(428, 417);
+            }
 
 
 
