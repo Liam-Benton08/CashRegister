@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CashRegister));
             this.numofburgerLabel = new System.Windows.Forms.Label();
             this.taxamountLabel = new System.Windows.Forms.Label();
             this.subtotalpriceLabel = new System.Windows.Forms.Label();
@@ -71,8 +72,12 @@
             this.recipttenderedInput = new System.Windows.Forms.Label();
             this.sticksButton = new System.Windows.Forms.Button();
             this.groupBox = new System.Windows.Forms.GroupBox();
+            this.printreciptButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.extrasButton = new System.Windows.Forms.Button();
             this.gearButton = new System.Windows.Forms.Button();
+            this.presubtotalOutput = new System.Windows.Forms.Label();
+            this.errormessage2Label = new System.Windows.Forms.Label();
             this.hyperlightnumInput = new System.Windows.Forms.MaskedTextBox();
             this.syncnumInput = new System.Windows.Forms.MaskedTextBox();
             this.trigger7numInput = new System.Windows.Forms.MaskedTextBox();
@@ -91,6 +96,9 @@
             this.numofskatesInput = new System.Windows.Forms.MaskedTextBox();
             this.numoflacesInput = new System.Windows.Forms.MaskedTextBox();
             this.numofpantsInput = new System.Windows.Forms.MaskedTextBox();
+            this.errormessageLabel = new System.Windows.Forms.Label();
+            this.gobackButton = new System.Windows.Forms.Button();
+            this.recipttextOutput = new System.Windows.Forms.Label();
             this.groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -211,7 +219,6 @@
             this.calculatechangeButton.TabIndex = 11;
             this.calculatechangeButton.Text = "Calculate Change";
             this.calculatechangeButton.UseVisualStyleBackColor = false;
-            //this.calculatechangeButton.Click += new System.EventHandler(this.calculatechangeButton_Click);
             // 
             // printreciptTotal
             // 
@@ -240,31 +247,34 @@
             // 
             this.subtotalpriceOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.subtotalpriceOutput.ForeColor = System.Drawing.Color.White;
-            this.subtotalpriceOutput.Location = new System.Drawing.Point(313, 251);
+            this.subtotalpriceOutput.Location = new System.Drawing.Point(914, 242);
             this.subtotalpriceOutput.Name = "subtotalpriceOutput";
-            this.subtotalpriceOutput.Size = new System.Drawing.Size(30, 25);
+            this.subtotalpriceOutput.Size = new System.Drawing.Size(194, 63);
             this.subtotalpriceOutput.TabIndex = 14;
             this.subtotalpriceOutput.Text = "...";
+            this.subtotalpriceOutput.Visible = false;
             // 
             // taxamountOutput
             // 
             this.taxamountOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.taxamountOutput.ForeColor = System.Drawing.Color.White;
-            this.taxamountOutput.Location = new System.Drawing.Point(277, 251);
+            this.taxamountOutput.Location = new System.Drawing.Point(908, 190);
             this.taxamountOutput.Name = "taxamountOutput";
-            this.taxamountOutput.Size = new System.Drawing.Size(30, 25);
+            this.taxamountOutput.Size = new System.Drawing.Size(159, 52);
             this.taxamountOutput.TabIndex = 15;
             this.taxamountOutput.Text = "...";
+            this.taxamountOutput.Visible = false;
             // 
             // totalpriceOutput
             // 
             this.totalpriceOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalpriceOutput.ForeColor = System.Drawing.Color.White;
-            this.totalpriceOutput.Location = new System.Drawing.Point(349, 251);
+            this.totalpriceOutput.Location = new System.Drawing.Point(920, 86);
             this.totalpriceOutput.Name = "totalpriceOutput";
-            this.totalpriceOutput.Size = new System.Drawing.Size(30, 25);
+            this.totalpriceOutput.Size = new System.Drawing.Size(207, 56);
             this.totalpriceOutput.TabIndex = 16;
             this.totalpriceOutput.Text = "...";
+            this.totalpriceOutput.Visible = false;
             // 
             // numofburgerInput
             // 
@@ -275,10 +285,15 @@
             // 
             // tenderedamountInput
             // 
-            this.tenderedamountInput.Location = new System.Drawing.Point(1037, 332);
+            this.tenderedamountInput.BackColor = System.Drawing.Color.Black;
+            this.tenderedamountInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tenderedamountInput.ForeColor = System.Drawing.Color.White;
+            this.tenderedamountInput.Location = new System.Drawing.Point(143, 395);
             this.tenderedamountInput.Name = "tenderedamountInput";
-            this.tenderedamountInput.Size = new System.Drawing.Size(100, 20);
+            this.tenderedamountInput.Size = new System.Drawing.Size(100, 24);
             this.tenderedamountInput.TabIndex = 18;
+            this.tenderedamountInput.Text = "0";
+            this.tenderedamountInput.Visible = false;
             // 
             // numofdrinksInput
             // 
@@ -299,7 +314,7 @@
             this.reciptOutline.BackColor = System.Drawing.Color.White;
             this.reciptOutline.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.reciptOutline.ForeColor = System.Drawing.Color.Transparent;
-            this.reciptOutline.Location = new System.Drawing.Point(933, 59);
+            this.reciptOutline.Location = new System.Drawing.Point(511, 59);
             this.reciptOutline.Name = "reciptOutline";
             this.reciptOutline.Size = new System.Drawing.Size(317, 461);
             this.reciptOutline.TabIndex = 21;
@@ -543,18 +558,41 @@
             // groupBox
             // 
             this.groupBox.BackColor = System.Drawing.Color.Black;
+            this.groupBox.Controls.Add(this.printreciptButton);
+            this.groupBox.Controls.Add(this.label1);
             this.groupBox.Controls.Add(this.extrasButton);
             this.groupBox.Controls.Add(this.gearButton);
             this.groupBox.Controls.Add(this.sticksButton);
             this.groupBox.Controls.Add(this.continueButton);
-            this.groupBox.Controls.Add(this.subtotalpriceOutput);
-            this.groupBox.Controls.Add(this.totalpriceOutput);
-            this.groupBox.Controls.Add(this.taxamountOutput);
+            this.groupBox.Controls.Add(this.tenderedamountInput);
+            this.groupBox.Controls.Add(this.presubtotalOutput);
             this.groupBox.Location = new System.Drawing.Point(1, 68);
             this.groupBox.Name = "groupBox";
             this.groupBox.Size = new System.Drawing.Size(457, 507);
             this.groupBox.TabIndex = 54;
             this.groupBox.TabStop = false;
+            // 
+            // printreciptButton
+            // 
+            this.printreciptButton.BackColor = System.Drawing.Color.Black;
+            this.printreciptButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.printreciptButton.ForeColor = System.Drawing.Color.Lime;
+            this.printreciptButton.Location = new System.Drawing.Point(122, 4260);
+            this.printreciptButton.Name = "printreciptButton";
+            this.printreciptButton.Size = new System.Drawing.Size(185, 51);
+            this.printreciptButton.TabIndex = 78;
+            this.printreciptButton.Text = "Print Recipt";
+            this.printreciptButton.UseVisualStyleBackColor = false;
+            this.printreciptButton.Click += new System.EventHandler(this.printreciptButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(237, 258);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 75;
+            this.label1.Text = "label1";
             // 
             // extrasButton
             // 
@@ -582,6 +620,29 @@
             this.gearButton.UseVisualStyleBackColor = false;
             this.gearButton.Click += new System.EventHandler(this.gearButton_Click);
             // 
+            // presubtotalOutput
+            // 
+            this.presubtotalOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.presubtotalOutput.ForeColor = System.Drawing.Color.White;
+            this.presubtotalOutput.Location = new System.Drawing.Point(30, 16);
+            this.presubtotalOutput.Name = "presubtotalOutput";
+            this.presubtotalOutput.Size = new System.Drawing.Size(323, 421);
+            this.presubtotalOutput.TabIndex = 55;
+            this.presubtotalOutput.Text = "...";
+            this.presubtotalOutput.Visible = false;
+            // 
+            // errormessage2Label
+            // 
+            this.errormessage2Label.BackColor = System.Drawing.Color.Red;
+            this.errormessage2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errormessage2Label.ForeColor = System.Drawing.Color.White;
+            this.errormessage2Label.Location = new System.Drawing.Point(377, 358);
+            this.errormessage2Label.Name = "errormessage2Label";
+            this.errormessage2Label.Size = new System.Drawing.Size(195, 23);
+            this.errormessage2Label.TabIndex = 75;
+            this.errormessage2Label.Text = "invalid character input";
+            this.errormessage2Label.Visible = false;
+            // 
             // hyperlightnumInput
             // 
             this.hyperlightnumInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -589,6 +650,7 @@
             this.hyperlightnumInput.Name = "hyperlightnumInput";
             this.hyperlightnumInput.Size = new System.Drawing.Size(51, 35);
             this.hyperlightnumInput.TabIndex = 56;
+            this.hyperlightnumInput.Text = "0";
             // 
             // syncnumInput
             // 
@@ -597,6 +659,7 @@
             this.syncnumInput.Name = "syncnumInput";
             this.syncnumInput.Size = new System.Drawing.Size(51, 35);
             this.syncnumInput.TabIndex = 57;
+            this.syncnumInput.Text = "0";
             // 
             // trigger7numInput
             // 
@@ -605,6 +668,7 @@
             this.trigger7numInput.Name = "trigger7numInput";
             this.trigger7numInput.Size = new System.Drawing.Size(51, 35);
             this.trigger7numInput.TabIndex = 58;
+            this.trigger7numInput.Text = "0";
             // 
             // item1Label
             // 
@@ -715,6 +779,7 @@
             this.numofcleartapeInput.Name = "numofcleartapeInput";
             this.numofcleartapeInput.Size = new System.Drawing.Size(51, 35);
             this.numofcleartapeInput.TabIndex = 68;
+            this.numofcleartapeInput.Text = "0";
             // 
             // numofchestpadInput
             // 
@@ -723,6 +788,7 @@
             this.numofchestpadInput.Name = "numofchestpadInput";
             this.numofchestpadInput.Size = new System.Drawing.Size(51, 35);
             this.numofchestpadInput.TabIndex = 69;
+            this.numofchestpadInput.Text = "0";
             // 
             // numofsticktapeInput
             // 
@@ -731,6 +797,7 @@
             this.numofsticktapeInput.Name = "numofsticktapeInput";
             this.numofsticktapeInput.Size = new System.Drawing.Size(51, 35);
             this.numofsticktapeInput.TabIndex = 70;
+            this.numofsticktapeInput.Text = "0";
             // 
             // numofskatesInput
             // 
@@ -739,6 +806,7 @@
             this.numofskatesInput.Name = "numofskatesInput";
             this.numofskatesInput.Size = new System.Drawing.Size(51, 35);
             this.numofskatesInput.TabIndex = 71;
+            this.numofskatesInput.Text = "0";
             // 
             // numoflacesInput
             // 
@@ -747,6 +815,7 @@
             this.numoflacesInput.Name = "numoflacesInput";
             this.numoflacesInput.Size = new System.Drawing.Size(51, 35);
             this.numoflacesInput.TabIndex = 72;
+            this.numoflacesInput.Text = "0";
             // 
             // numofpantsInput
             // 
@@ -755,17 +824,63 @@
             this.numofpantsInput.Name = "numofpantsInput";
             this.numofpantsInput.Size = new System.Drawing.Size(51, 35);
             this.numofpantsInput.TabIndex = 73;
+            this.numofpantsInput.Text = "0";
+            // 
+            // errormessageLabel
+            // 
+            this.errormessageLabel.BackColor = System.Drawing.Color.Red;
+            this.errormessageLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.errormessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errormessageLabel.ForeColor = System.Drawing.Color.White;
+            this.errormessageLabel.Location = new System.Drawing.Point(241, 110);
+            this.errormessageLabel.Name = "errormessageLabel";
+            this.errormessageLabel.Size = new System.Drawing.Size(471, 404);
+            this.errormessageLabel.TabIndex = 76;
+            this.errormessageLabel.Text = "ERROR";
+            this.errormessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.errormessageLabel.Visible = false;
+            // 
+            // gobackButton
+            // 
+            this.gobackButton.BackColor = System.Drawing.Color.White;
+            this.gobackButton.ForeColor = System.Drawing.Color.Red;
+            this.gobackButton.Location = new System.Drawing.Point(428, 4170);
+            this.gobackButton.Name = "gobackButton";
+            this.gobackButton.Size = new System.Drawing.Size(90, 33);
+            this.gobackButton.TabIndex = 77;
+            this.gobackButton.Text = "Go back";
+            this.gobackButton.UseVisualStyleBackColor = false;
+            this.gobackButton.Click += new System.EventHandler(this.gobackButton_Click);
+            // 
+            // recipttextOutput
+            // 
+            this.recipttextOutput.BackColor = System.Drawing.Color.White;
+            this.recipttextOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.recipttextOutput.ForeColor = System.Drawing.Color.Black;
+            this.recipttextOutput.Location = new System.Drawing.Point(511, 60);
+            this.recipttextOutput.Name = "recipttextOutput";
+            this.recipttextOutput.Size = new System.Drawing.Size(317, 454);
+            this.recipttextOutput.TabIndex = 78;
+            this.recipttextOutput.Text = "...";
+            this.recipttextOutput.Visible = false;
             // 
             // CashRegister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(807, 576);
+            this.ClientSize = new System.Drawing.Size(459, 576);
+            this.Controls.Add(this.errormessage2Label);
+            this.Controls.Add(this.recipttextOutput);
+            this.Controls.Add(this.gobackButton);
+            this.Controls.Add(this.reciptOutline);
             this.Controls.Add(this.numofpantsInput);
             this.Controls.Add(this.numoflacesInput);
             this.Controls.Add(this.numofskatesInput);
+            this.Controls.Add(this.taxamountOutput);
+            this.Controls.Add(this.subtotalpriceOutput);
             this.Controls.Add(this.numofsticktapeInput);
+            this.Controls.Add(this.totalpriceOutput);
             this.Controls.Add(this.numofchestpadInput);
             this.Controls.Add(this.numofcleartapeInput);
             this.Controls.Add(this.item2priceLabel);
@@ -800,10 +915,8 @@
             this.Controls.Add(this.recipttaxtotalLabel);
             this.Controls.Add(this.recipttotalpriceLabel);
             this.Controls.Add(this.companyincLabel);
-            this.Controls.Add(this.reciptOutline);
             this.Controls.Add(this.numoffriesInput);
             this.Controls.Add(this.numofdrinksInput);
-            this.Controls.Add(this.tenderedamountInput);
             this.Controls.Add(this.numofburgerInput);
             this.Controls.Add(this.totalchangeOutput);
             this.Controls.Add(this.printreciptTotal);
@@ -818,9 +931,12 @@
             this.Controls.Add(this.taxamountLabel);
             this.Controls.Add(this.numofburgerLabel);
             this.Controls.Add(this.groupBox);
+            this.Controls.Add(this.errormessageLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CashRegister";
-            this.Text = "Cash Register";
+            this.Text = "Hockey World";
             this.groupBox.ResumeLayout(false);
+            this.groupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -891,6 +1007,13 @@
         private System.Windows.Forms.MaskedTextBox numofskatesInput;
         private System.Windows.Forms.MaskedTextBox numoflacesInput;
         private System.Windows.Forms.MaskedTextBox numofpantsInput;
+        private System.Windows.Forms.Label presubtotalOutput;
+        private System.Windows.Forms.Label errormessage2Label;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label errormessageLabel;
+        private System.Windows.Forms.Button gobackButton;
+        private System.Windows.Forms.Button printreciptButton;
+        private System.Windows.Forms.Label recipttextOutput;
     }
 }
 

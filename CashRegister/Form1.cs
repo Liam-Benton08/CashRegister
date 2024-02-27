@@ -61,16 +61,48 @@ namespace CashRegister
                 numofhyperlight = Convert.ToInt32(hyperlightnumInput.Text);
                 numoftrigger7 = Convert.ToInt32(trigger7numInput.Text);
                 numofsync = Convert.ToInt32(syncnumInput.Text);
-                numofchestpad = Convert.ToInt32(hyperlightnumInput.Text);
-                numofskates = Convert.ToInt32(trigger7numInput.Text);
-                numofpants = Convert.ToInt32(syncnumInput.Text);
-                numofcleartape = Convert.ToInt32(hyperlightnumInput.Text);
-                numofsticktape = Convert.ToInt32(trigger7numInput.Text);
-                numoflaces = Convert.ToInt32(syncnumInput.Text);
+                numofchestpad = Convert.ToInt32(numofchestpadInput.Text);
+                numofskates = Convert.ToInt32(numofskatesInput.Text);
+                numofpants = Convert.ToInt32(numofpantsInput.Text);
+                numofcleartape = Convert.ToInt32(numofcleartapeInput.Text);
+                numofsticktape = Convert.ToInt32(numofsticktapeInput.Text);
+                numoflaces = Convert.ToInt32(numoflacesInput.Text);
+               
 
+                hyperlightnumInput.Visible = false;
+                trigger7numInput.Visible = false;
+                syncnumInput.Visible = false;
+                numofchestpadInput.Visible = false;
+                numofskatesInput.Visible = false;
+                numofpantsInput.Visible = false;
+                numofcleartapeInput.Visible = false;
+                numofsticktapeInput.Visible = false;
+                numoflacesInput.Visible = false;
+                item1Label.Visible = false;
+                item2Label.Visible = false;
+                item3Label.Visible = false;
                 sticksButton.Visible = false;
                 gearButton.Visible = false;
-                extrasButton.Visible = false;  
+                extrasButton.Visible = false;
+                item1priceLabel.Visible = false;
+                item2priceLabel.Visible = false;
+                item3priceLabel.Visible = false;
+                numofitemsLabel1.Visible = false;
+                numofitemsLabel2.Visible = false;
+                numofitemsLabel3.Visible = false;
+
+                reciptOutline.Visible = true;
+                presubtotalOutput.Visible = true;
+                subtotalpriceOutput.Visible = true;
+                taxamountOutput.Visible = true;
+                totalpriceOutput.Visible = true;
+                tenderedamountInput.Visible = true;
+
+                continueButton.Location = new Point(1000, 1000);
+                printreciptButton.Location = new Point(122, 426);
+
+                this.Size = new Size(900, 615);
+                
 
                 hyperlighttotal = numofhyperlight * hyperlightprice;
                 trigger7total = numoftrigger7 * trigger7price;
@@ -81,27 +113,46 @@ namespace CashRegister
                 cleartapetotal = numofcleartape * cleartapeprice;
                 sticktapetotal = numofsticktape * sticktapeprice;
                 lacestotal = numoflaces * lacesprice;
+                sticktotal = hyperlighttotal + trigger7total + synctotal;
+                geartotal = chestpadtotal + skatestotal + pantstotal;
+                extrastotal = cleartapetotal + sticktapetotal + lacestotal;
+
 
                 subtotal = hyperlighttotal + trigger7total + synctotal + chestpadtotal + skatestotal + pantstotal + cleartapetotal + sticktapetotal + lacestotal;
                 taxamount = subtotal * taxrate;
                 totalprice = subtotal + taxamount;
+
                 
 
-                subtotalpriceOutput.Text = $"{subtotal.ToString("C")}";
-                taxamountOutput.Text = $"{taxamount.ToString("C")}";
-                totalpriceOutput.Text = $"{totalprice.ToString("C")}";
-               
+
+                presubtotalOutput.Text = $"Hyperlights : {numofhyperlight}";
+                presubtotalOutput.Text += $"\nTrigger 7s : {numoftrigger7}";
+                presubtotalOutput.Text += $"\nSyncs : {numofsync}";
+                presubtotalOutput.Text += $"\nChestpads : {numofchestpad}";
+                presubtotalOutput.Text += $"\nSkates : {numofskates}";
+                presubtotalOutput.Text += $"\nPants : {numofpants}";
+                presubtotalOutput.Text += $"\nClear tape : {numofcleartape}";
+                presubtotalOutput.Text += $"\nStick tape : {numofsticktape}";
+                presubtotalOutput.Text += $"\nLaces : {numoflaces}";
+                presubtotalOutput.Text += $"\nSticks total : {sticktotal.ToString("C")}";
+                presubtotalOutput.Text += $"\nGear total : {geartotal.ToString("C")}";
+                presubtotalOutput.Text += $"\nExtras total : {extrastotal.ToString("C")}";
+                presubtotalOutput.Text += $"\nSubtotal : {subtotal.ToString("C")}";
+                presubtotalOutput.Text += $"\nTax total : {taxamount.ToString("C")}";
+                presubtotalOutput.Text += $"\nTotal price : {totalprice.ToString("C")}";
+                presubtotalOutput.Text += $"\nTendered :";
+                
+
 
             }
 
             catch
             {
-                subtotalpriceLabel.Text = "ERROR";
-                totalpriceLabel.Text = "";
-                taxamountLabel.Text = "";
-                taxamountOutput.Visible = false;
-                totalpriceOutput.Visible = false;
-                subtotalpriceOutput.Visible = false;
+                errormessageLabel.Visible = true;
+                errormessage2Label.Visible = true;
+                errormessage2Label.BringToFront();
+                gobackButton.Location = new Point(428, 417);
+               
 
             }
           
@@ -110,22 +161,6 @@ namespace CashRegister
 
         private void continueButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                
-
-                tenderedamount = Convert.ToDouble(tenderedamountInput.Text);
-
-                totalchange = tenderedamount - totalprice;
-
-                totalchangeOutput.Text = $"{totalchange.ToString("C")}";
-
-            }
-            catch
-            {
-                changeamountLabel.Text = "ERROR";
-            }
-
 
         }
 
@@ -223,6 +258,48 @@ namespace CashRegister
             numofitemsLabel3.Text = "# of these you want to purchase";
         }
 
-     
+        private void gobackButton_Click(object sender, EventArgs e)
+        {
+            errormessageLabel.Visible = false;
+            errormessage2Label.Visible = false;
+            gobackButton.Location = new Point(428, 4170);
+        }
+
+        private void printreciptButton_Click(object sender, EventArgs e)
+        {
+            tenderedamount = Convert.ToDouble(tenderedamountInput.Text);
+
+            totalchange = tenderedamount - totalprice;
+
+            printreciptButton.Location = new Point(1000, 1000);
+
+            recipttextOutput.Visible = true;
+
+            recipttextOutput.Text = $"-------------------------------------------------------------";
+            recipttextOutput.Text += $"\n                   Hockey World INC";
+            recipttextOutput.Text += $"\n-------------------------------------------------------------";
+            recipttextOutput.Text += $"\n     Order Number 1001";
+            recipttextOutput.Text += $"\n     September 5, 2008";
+            recipttextOutput.Text += $"\n-------------------------------------------------------------";
+            recipttextOutput.Text += $"\n     Hyperlights      x{numofhyperlight} @ {hyperlighttotal.ToString("C")}";
+            recipttextOutput.Text += $"\n     Trigger7           x{numoftrigger7} @ {trigger7total.ToString("C")}";
+            recipttextOutput.Text += $"\n     Syncs               x{numofsync} @ {synctotal.ToString("C")}";
+            recipttextOutput.Text += $"\n     Chestpad        x{numofchestpad} @ {chestpadtotal.ToString("C")}";
+            recipttextOutput.Text += $"\n     Skates            x{numofskates} @ {skatestotal.ToString("C")}";
+            recipttextOutput.Text += $"\n     Pants              x{numofpants} @ {pantstotal.ToString("C")}";
+            recipttextOutput.Text += $"\n     Clear tape       x{numofcleartape} @ {cleartapetotal.ToString("C")}";
+            recipttextOutput.Text += $"\n     Stick tape       x{numofsticktape} @ {sticktapetotal.ToString("C")}";
+            recipttextOutput.Text += $"\n     Laces              x{numoflaces} @ {lacestotal.ToString("C")}";
+            recipttextOutput.Text += $"\n-------------------------------------------------------------";
+            recipttextOutput.Text += $"\n     Subtotal                     {subtotal.ToString("C")}";
+            recipttextOutput.Text += $"\n     Tax                             {taxamount.ToString("C")}";
+            recipttextOutput.Text += $"\n     Total                           {totalprice.ToString("C")}";
+            recipttextOutput.Text += $"\n-------------------------------------------------------------";
+            recipttextOutput.Text += $"\n     Tendered                   {tenderedamount.ToString("C")}";
+            recipttextOutput.Text += $"\n     Change                     {totalchange.ToString("C")}";
+
+
+
+        }
     }
 }
