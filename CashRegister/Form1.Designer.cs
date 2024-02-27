@@ -834,7 +834,7 @@
             this.errormessageLabel.ForeColor = System.Drawing.Color.White;
             this.errormessageLabel.Location = new System.Drawing.Point(241, 110);
             this.errormessageLabel.Name = "errormessageLabel";
-            this.errormessageLabel.Size = new System.Drawing.Size(471, 404);
+            this.errormessageLabel.Size = new System.Drawing.Size(465, 404);
             this.errormessageLabel.TabIndex = 76;
             this.errormessageLabel.Text = "ERROR";
             this.errormessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
