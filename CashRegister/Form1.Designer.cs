@@ -99,6 +99,7 @@
             this.errormessageLabel = new System.Windows.Forms.Label();
             this.gobackButton = new System.Windows.Forms.Button();
             this.recipttextOutput = new System.Windows.Forms.Label();
+            this.neworderButton = new System.Windows.Forms.Button();
             this.groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -231,7 +232,7 @@
             this.printreciptTotal.TabIndex = 12;
             this.printreciptTotal.Text = "Print Recipts";
             this.printreciptTotal.UseVisualStyleBackColor = false;
-            this.printreciptTotal.Click += new System.EventHandler(this.printreciptTotal_Click);
+            //this.printreciptTotal.Click += new System.EventHandler(this.printreciptTotal_Click);
             // 
             // totalchangeOutput
             // 
@@ -558,6 +559,7 @@
             // groupBox
             // 
             this.groupBox.BackColor = System.Drawing.Color.Black;
+            this.groupBox.Controls.Add(this.neworderButton);
             this.groupBox.Controls.Add(this.printreciptButton);
             this.groupBox.Controls.Add(this.label1);
             this.groupBox.Controls.Add(this.extrasButton);
@@ -864,15 +866,30 @@
             this.recipttextOutput.Text = "...";
             this.recipttextOutput.Visible = false;
             // 
+            // neworderButton
+            // 
+            this.neworderButton.BackColor = System.Drawing.Color.Black;
+            this.neworderButton.Enabled = false;
+            this.neworderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.neworderButton.ForeColor = System.Drawing.Color.Lime;
+            this.neworderButton.Location = new System.Drawing.Point(143, 429);
+            this.neworderButton.Name = "neworderButton";
+            this.neworderButton.Size = new System.Drawing.Size(146, 48);
+            this.neworderButton.TabIndex = 79;
+            this.neworderButton.Text = "New Order";
+            this.neworderButton.UseVisualStyleBackColor = false;
+            this.neworderButton.Visible = false;
+            this.neworderButton.Click += new System.EventHandler(this.neworderButton_Click);
+            // 
             // CashRegister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(459, 576);
-            this.Controls.Add(this.errormessage2Label);
-            this.Controls.Add(this.recipttextOutput);
+            this.ClientSize = new System.Drawing.Size(460, 576);
             this.Controls.Add(this.gobackButton);
+            this.Controls.Add(this.errormessage2Label);
+            this.Controls.Add(this.errormessageLabel);
             this.Controls.Add(this.reciptOutline);
             this.Controls.Add(this.numofpantsInput);
             this.Controls.Add(this.numoflacesInput);
@@ -931,7 +948,7 @@
             this.Controls.Add(this.taxamountLabel);
             this.Controls.Add(this.numofburgerLabel);
             this.Controls.Add(this.groupBox);
-            this.Controls.Add(this.errormessageLabel);
+            this.Controls.Add(this.recipttextOutput);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CashRegister";
             this.Text = "Hockey World";
@@ -1014,6 +1031,7 @@
         private System.Windows.Forms.Button gobackButton;
         private System.Windows.Forms.Button printreciptButton;
         private System.Windows.Forms.Label recipttextOutput;
+        private System.Windows.Forms.Button neworderButton;
     }
 }
 
